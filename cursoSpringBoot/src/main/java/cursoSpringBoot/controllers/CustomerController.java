@@ -17,11 +17,14 @@ public class CustomerController {
             new Customer(234,"Marcelo Perez","perlom","perlo3444")
     ));
 
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET)
+    // @GetMapping
     public List<Customer> getCustomers() {
         return customers;
     }
-    @GetMapping("/{username}")
+
+    @RequestMapping(value ="/{username}" , method = RequestMethod.GET)
+    //@GetMapping("/{username}")
     public Customer getCustomer(@PathVariable String username){
         for (Customer c:customers){
             if (c.getUsername().equals(username)){
@@ -32,13 +35,15 @@ public class CustomerController {
         return null;
     }
 
-    @PostMapping
+    @RequestMapping(method = RequestMethod.POST)
+    //@PostMapping
     public Customer postCliente(@RequestBody Customer customer){
         customers.add(customer);
         return customer;
     }
 
-    @PutMapping
+    @RequestMapping(method = RequestMethod.PUT)
+    // @PutMapping
     public Customer putCliente (@RequestBody Customer customer){
 
         for (Customer c: customers){
@@ -51,8 +56,8 @@ public class CustomerController {
         }
         return null;
     }
-
-    @DeleteMapping("/{id}")
+    @RequestMapping(value ="/{id}" , method = RequestMethod.DELETE)
+    // @DeleteMapping("/{id}")
     public Customer deleteCliente (@PathVariable int id){
         for (Customer c: customers){
             if (c.getID() == id){
@@ -63,7 +68,8 @@ public class CustomerController {
         return null;
     }
 
-    @PatchMapping
+    @RequestMapping(method = RequestMethod.PATCH)
+    //@PatchMapping
     public Customer patchCliente(@RequestBody Customer customer){
         for (Customer c : customers){
             if (c.getID() == customer.getID()){
