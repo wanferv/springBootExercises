@@ -37,4 +37,29 @@ public class CustomerController {
         return customer;
     }
 
+    @PutMapping("/clientes")
+    public Customer putCliente (@RequestBody Customer customer){
+
+        for (Customer c: customers){
+            if (c.getID() == customer.getID()){
+                c.setName(customer.getName());
+                c.setUsername(customer.getUsername());
+                c.setPassword(customer.getPassword());
+                return c;
+            }
+        }
+        return null;
+    }
+
+    @DeleteMapping("/clientes/{id}")
+    public Customer deleteCliente (@PathVariable int id){
+        for (Customer c: customers){
+            if (c.getID() == id){
+                customers.remove(c);
+                return c;
+            }
+        }
+        return null;
+    }
+
 }
